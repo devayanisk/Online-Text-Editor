@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
 });
 
 const server = app.listen(
-    5000,
+    6000,
     console.log('Server running on PORT')
 );
   
