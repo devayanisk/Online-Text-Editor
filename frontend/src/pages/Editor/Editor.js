@@ -1,6 +1,7 @@
 import Quill from 'quill'
 //import './App.css';
 import {useEffect, useState} from 'react'
+// eslint-disable-next-line
 import {useParams} from 'react-router-dom'
 import {io} from 'socket.io-client'
 import "quill/dist/quill.snow.css"
@@ -31,7 +32,7 @@ function Editor() {
     if (socket && quill){
 
       const handler = function(delta, oldDelta, source) {
-        if (source == 'user'){
+        if (source === 'user'){
           socket.emit("document-change", delta);
         }
       }
