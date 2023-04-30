@@ -5,8 +5,6 @@ import DocumentCard from '../../components/DocumentCard'
 const Notes = () => {
 
     const [notes, setNotes] = useState()
-
-    const url = "http://localhost:6001/api/document/fetch-documents";
     let authToken = localStorage.getItem("authToken");
     
     // Render the first time
@@ -25,6 +23,7 @@ const Notes = () => {
         let response = await axios.delete(`http://localhost:6001/api/document/delete-document/${id}`, { headers: { authToken } });
 
         // console.log(response.data);
+        alert(`Document ${response.data.deletedDocument.title} deleted!`)
         getDocuments();
     }
 
