@@ -46,7 +46,43 @@ router.post('/add-document', fetchuser,
         }
     });
 
+
     
+const io = require('socket.io')(3001, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+    },
+});
+const defaultValue = "";
+
+router.get('/document/:id', async (req, res) => {
+    const documentId = req.params.id;
+    const document = await findOrCreateDocument(documentId);
+
+    io.on('connection', socket => {
+        socket.join(documentId);
+        socket.emit('load-document', document.data);
+
+        socket.on('send-changes', delta => {
+            socket.broadcast.to(documentId).emit('receive-changes', delta);
+        });
+
+        socket.on('save-document', async data => {
+            await Document.findByIdAndUpdate(documentId, { data });
+        });
+    });
+});
+
+async function findOrCreateDocument(id) {
+    if (id == null) return;
+
+    const document = await Document.findById(id);
+    if (document) return document;
+    return await Document.create({ _id: id, data: defaultValue });
+}
+
+
 // 3: Update an existing note of a user using PUT /api/notes/update-note. Login Required
 router.put('/update-document/:id', fetchuser,
     async (req, res) => {
@@ -98,10 +134,10 @@ router.delete("/delete-document/:id", fetchuser,
             }
 
             // find the note to be deleted using the note id and not the user id
-            let deletedNote = await Notes.findByIdAndDelete(req.params.id) // this will delete the document and return it as well
+            let deletedDocument = await Notes.findByIdAndDelete(req.params.id) // this will delete the document and return it as well
             // let deletedNote = await Notes.deleteOne({_id : req.params.id})  // this will only delete the document but not return it
 
-            res.json({ deletedNote })
+            res.json({ deletedDocument })
 
         } catch (error) {
             console.error(error.message)
