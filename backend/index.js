@@ -6,13 +6,6 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const connectToMongo = require('./db');
 
- 
-// mongoose.connect('mongodb+srv://devayanisk:texteditor@cluster0.vhrsll8.mongodb.net/test');
-
-// db=mongoose.connection
-// db.on('error',(error)=>(console.log(error)))
-// db.once('open',()=>(console.log("Succesful")))
-
 connectToMongo();
 
 const app = express();
