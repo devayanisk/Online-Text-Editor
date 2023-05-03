@@ -1,0 +1,52 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .landing-page-title {
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* change to your desired font family */
+    font-weight: bold;
+    font-size: 4rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+.landing-page {
+    background-image: url('./image2.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+  
+  .landing-page-content {
+    text-align: center;
+  }
+  
+  .landing-page-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .landing-page-description {
+    font-size: 1.5rem;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+  
+  .landing-page-button {
+    font-size: 1.2rem;
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #3f51b5;
+    color: white;
+    cursor: pointer;
+  }
+  
